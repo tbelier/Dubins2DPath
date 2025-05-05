@@ -8,10 +8,6 @@ dubin_path.MAX_LINE_DISTANCE = 0.1  # Ex. 10 cm entre chaque point sur ligne dro
 dubin_path.MAX_CURVE_DISTANCE = 0.1 # Ex. 10 cm sur les arcs
 dubin_path.MAX_CURVE_ANGLE = 0.1    # Ex. 0.1 radian (~5.7°) entre deux points d'un arc
 
-
-
-
-
 # Style sombre
 #plt.style.use('dark_background')
 class Save():
@@ -26,18 +22,32 @@ def update(val):
     radius = slider_radius.val
     
     # Calculer le chemin Dubins en fonction des sliders
-    solution = dubin_path.dubins_path([x0, y0, theta0], [x1, y1, theta1], radius=radius)
-    save.points = np.array(dubin_path.get_projection([x0, y0, theta0], [x1, y1, theta1], solution))
-    
-    # Mettre à jour l'affichage du chemin Dubins
+    solutions = dubin_path.all_dubins_paths([x0, y0, theta0], [x1, y1, theta1], radius=radius)
     ax.clear()
-    ax.plot(save.points[:,0], save.points[:,1], label="Chemin Dubins", color="cyan")
+    colors = ["red", "orange", "yellow", "green", "blue", "violet"]
+    for k in range(len(solutions)):
+        solution = solutions[k]
+        mode = solution[0]
+        print(mode)
+        save.points = np.array(dubin_path.get_projection([x0, y0, theta0], [x1, y1, theta1], solution))
     
-    # Ajouter les sliders et labels
+        # Mettre à jour l'affichage du chemin Dubins
+        if k == 0 : ax.plot(save.points[:,0], save.points[:,1], label=mode, color="red")
+        else : ax.plot(save.points[:,0], save.points[:,1], label=mode, color=[0.0,0.0,1.0,0.2])
+        
+        ax.quiver(save.points[0,0],save.points[0,1],np.sin(np.deg2rad(save.points[0,2])),np.cos(np.deg2rad(save.points[0,2])), color="green")
+        ax.quiver(save.points[-1,0],save.points[-1,1],np.sin(np.deg2rad(save.points[-1,2])),np.cos(np.deg2rad(save.points[-1,2])), color="red")
+        ax.add_patch(plt.Circle((x0+radius*np.cos(np.pi/2+theta0), y0+radius*np.sin(np.pi/2+theta0)), radius, fill=False, linestyle = "--", edgecolor=[0.5,0.5,0.5,0.4]))
+        ax.add_patch(plt.Circle((x0+radius*np.cos(-np.pi/2+theta0), y0+radius*np.sin(-np.pi/2+theta0)), radius, fill=False, linestyle = "--", edgecolor=[0.5,0.5,0.5,0.4]))
+        ax.add_patch(plt.Circle((x1+radius*np.cos(np.pi/2+theta1), y1+radius*np.sin(np.pi/2+theta1)), radius, fill=False, linestyle = "--", edgecolor=[0.5,0.5,0.5,0.4]))
+        ax.add_patch(plt.Circle((x1+radius*np.cos(-np.pi/2+theta1), y1+radius*np.sin(-np.pi/2+theta1)), radius, fill=False, linestyle = "--", edgecolor=[0.5,0.5,0.5,0.4]))
+
+# Ajouter les sliders et labels
     ax.set_xlabel("x")
     ax.set_ylabel("y")
     ax.axis("equal")
     ax.legend()
+    
     fig.canvas.draw_idle()
 
 # Fonction pour enregistrer le chemin généré par le Dubins path
@@ -52,6 +62,8 @@ if __name__ == "__main__":
     #                    Création de la figure et des axes
     # -------------------------------------------------------------------- 
     fig, ax = plt.subplots()
+    
+    
     plt.subplots_adjust(bottom=0.45)  # Ajusté pour éviter la superposition des sliders et bouton
     file_path = os.path.abspath(__file__)
     file_dir = os.path.dirname(file_path)
@@ -71,10 +83,10 @@ if __name__ == "__main__":
 
     slider_x0 = Slider(ax_x0, "x0", -10.0, 10.0, valinit=x0_init)
     slider_y0 = Slider(ax_y0, "y0", -10.0, 10.0, valinit=y0_init)
-    slider_theta0 = Slider(ax_theta0, "theta0", -np.pi, np.pi, valinit=theta0_init)
+    slider_theta0 = Slider(ax_theta0, "theta0", 0, 2*np.pi, valinit=theta0_init)
     slider_x1 = Slider(ax_x1, "x1", -10.0, 20.0, valinit=x1_init)
     slider_y1 = Slider(ax_y1, "y1", -10.0, 20.0, valinit=y1_init)
-    slider_theta1 = Slider(ax_theta1, "theta1", -np.pi, np.pi, valinit=theta1_init)
+    slider_theta1 = Slider(ax_theta1, "theta1", 0, 2*np.pi, valinit=theta1_init)
     slider_radius = Slider(ax_radius, "Rayon de giration", 1.0, 10.0, valinit=radius_init)
 
     # Ajout des callbacks pour les sliders
