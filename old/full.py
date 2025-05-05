@@ -128,3 +128,16 @@ if __name__ == "__main__":
     plt.colorbar(scatter, label="Distance parcourue (m)")
     plt.show()
 
+
+
+Bonjour Héloïse,
+
+En relisant les mails j'ai deux petites questions :
+- Avec Maïwenn, nous avons prévu de prendre la formule Ifremer (pas FREE Ifremer). Je ne vois pas quelle case cocher sur la fiche que tu nous as renvoyé.
+- Dans le mail de la MINOU Surf school, ils disent : "formule 16 cours revient à 320€ au lieu de 370€ (tarif normal de l'école),  IFREMER participe à vos frais à hauteur de 150€, et nous règle l'intégralité de la prestation par virement"
+Je ne comprends pas le calcul, il n'y a pas d'erreur ? Si je comprends bien on doit virer deux fois 320€ pour nous deux, c'est bien ça ?
+- Enfin, Maïwenn est en ce moment en mer, on aimerait donc prendre 16 cours pour nous deux réunis. C'est-à-dire 8 cours pour elle et 8 pour moi, et nous irions ensemble à tous ces cours. Est-ce que cela convient pour le forfait 16 cours ?
+
+Je te remercie pour ton aide,
+Bonne journée,
+BELIER Titouan et GROLEAU Maïwenn
