@@ -28,7 +28,7 @@ def update(val):
     for k in range(len(solutions)):
         solution = solutions[k]
         mode = solution[0]
-        print(mode)
+        #print(mode)
         save.points = np.array(dubin_path.get_projection([x0, y0, theta0], [x1, y1, theta1], solution))
     
         # Mettre à jour l'affichage du chemin Dubins
@@ -37,10 +37,10 @@ def update(val):
         
         ax.quiver(save.points[0,0],save.points[0,1],np.sin(np.deg2rad(save.points[0,2])),np.cos(np.deg2rad(save.points[0,2])), color="green")
         ax.quiver(save.points[-1,0],save.points[-1,1],np.sin(np.deg2rad(save.points[-1,2])),np.cos(np.deg2rad(save.points[-1,2])), color="red")
-        ax.add_patch(plt.Circle((x0+radius*np.cos(np.pi/2+theta0), y0+radius*np.sin(np.pi/2+theta0)), radius, fill=False, linestyle = "--", edgecolor=[0.5,0.5,0.5,0.4]))
-        ax.add_patch(plt.Circle((x0+radius*np.cos(-np.pi/2+theta0), y0+radius*np.sin(-np.pi/2+theta0)), radius, fill=False, linestyle = "--", edgecolor=[0.5,0.5,0.5,0.4]))
-        ax.add_patch(plt.Circle((x1+radius*np.cos(np.pi/2+theta1), y1+radius*np.sin(np.pi/2+theta1)), radius, fill=False, linestyle = "--", edgecolor=[0.5,0.5,0.5,0.4]))
-        ax.add_patch(plt.Circle((x1+radius*np.cos(-np.pi/2+theta1), y1+radius*np.sin(-np.pi/2+theta1)), radius, fill=False, linestyle = "--", edgecolor=[0.5,0.5,0.5,0.4]))
+        ax.add_patch(plt.Circle((x0+radius*np.cos(np.pi/2+theta0), y0+radius*np.sin(np.pi/2+theta0)), radius, fill=False, linestyle = "--", edgecolor=[0.5,0.5,0.5,0.]))
+        ax.add_patch(plt.Circle((x0+radius*np.cos(-np.pi/2+theta0), y0+radius*np.sin(-np.pi/2+theta0)), radius, fill=False, linestyle = "--", edgecolor=[0.5,0.5,0.5,0.]))
+        ax.add_patch(plt.Circle((x1+radius*np.cos(np.pi/2+theta1), y1+radius*np.sin(np.pi/2+theta1)), radius, fill=False, linestyle = "--", edgecolor=[0.5,0.5,0.5,0.]))
+        ax.add_patch(plt.Circle((x1+radius*np.cos(-np.pi/2+theta1), y1+radius*np.sin(-np.pi/2+theta1)), radius, fill=False, linestyle = "--", edgecolor=[0.5,0.5,0.5,0.]))
 
 # Ajouter les sliders et labels
     ax.set_xlabel("x")
